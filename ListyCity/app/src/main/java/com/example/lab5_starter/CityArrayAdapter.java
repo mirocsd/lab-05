@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,11 @@ public class CityArrayAdapter extends ArrayAdapter<City> {
         City city = cities.get(position);
         TextView movieName = view.findViewById(R.id.textCityName);
         TextView movieYear = view.findViewById(R.id.textCityProvince);
+        Button deleteCityBtn = view.findViewById(R.id.deleteCityBtn);
+
+        deleteCityBtn.setOnClickListener(v -> {
+            
+        });
 
         movieName.setText(city.getName());
         movieYear.setText(city.getProvince());
