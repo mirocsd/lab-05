@@ -19,7 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CityDialogFragment.CityDialogListener {
+public class MainActivity extends AppCompatActivity implements CityDialogFragment.CityDialogListener, CityArrayAdapter.OnDeleteClickListener {
 
     private Button addCityButton;
     private ListView cityListView;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements CityDialogFragmen
 
         // create city array
         cityArrayList = new ArrayList<>();
-        cityArrayAdapter = new CityArrayAdapter(this, cityArrayList);
+        cityArrayAdapter = new CityArrayAdapter(this, cityArrayList, this::onDeleteClick);
         cityListView.setAdapter(cityArrayAdapter);
 
         // set listeners
@@ -107,8 +107,7 @@ public class MainActivity extends AppCompatActivity implements CityDialogFragmen
         docRef.set(city);
     }
 
-    @Override
-    public void deleteCity(City city) {
+    public void onDeleteClick(City city) {
         cityArrayList.remove(city);
         cityArrayAdapter.notifyDataSetChanged();
 

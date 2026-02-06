@@ -16,11 +16,17 @@ import java.util.ArrayList;
 public class CityArrayAdapter extends ArrayAdapter<City> {
     private ArrayList<City> cities;
     private Context context;
+    private OnDeleteClickListener listener;
 
-    public CityArrayAdapter(Context context, ArrayList<City> cities){
+    public interface OnDeleteClickListener {
+        void onDeleteClick(City city);
+    }
+
+    public CityArrayAdapter(Context context, ArrayList<City> cities, OnDeleteClickListener listener){
         super(context, 0, cities);
         this.cities = cities;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,7 +42,7 @@ public class CityArrayAdapter extends ArrayAdapter<City> {
         Button deleteCityBtn = view.findViewById(R.id.deleteCityBtn);
 
         deleteCityBtn.setOnClickListener(v -> {
-            
+            listener.onDeleteClick(city);
         });
 
         movieName.setText(city.getName());
